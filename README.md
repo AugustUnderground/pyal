@@ -25,7 +25,8 @@ import yal
 modules = yal.read('./example/example.yal')
 ```
 
-See the [API documentation]() for more information.
+See the [API documentation](https://augustunderground.github.io/pyal/core.html)
+for more information.
 
 CLI:
 
