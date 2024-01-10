@@ -39,7 +39,7 @@ If the the set of `*.yal` files comprising the MCNC data set are in a folder
 called `mcnc` they can be converted to `*.yaml` like so:
 
 ```sh
-for y in ./mcnc/*; do yal2yaml $y > "${y%.yal}.yaml"; done
+for y in ./mcnc/*.yal; do yal2yaml $y > "${y%.yal}.yaml"; done
 ```
 
 ## Installation
