@@ -19,7 +19,7 @@ The `example/example.yal` is taken from the
 
 Module:
 
-```
+```python
 import yal
 
 modules = yal.read('./example/example.yal')
