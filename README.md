@@ -35,6 +35,13 @@ $ yal2yaml ./example/example.yal > ./exmaple/example.yaml
 $ cat ./example/example.yal | yal2yaml > ./example/example.yaml
 ```
 
+If the the set of `*.yal` files comprising the MCNC data set are in a folder
+called `mcnc` they can be converted to `*.yaml` like so:
+
+```sh
+for y in ./mcnc/*; do yal2yaml $y > "${y%.yal}.yaml"; done
+```
+
 ## Installation
 
 From git with pip:
