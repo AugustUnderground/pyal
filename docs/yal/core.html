@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>yal.core API documentation</title>
+<meta name="description" content="yal.core …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>yal.core</code></h1>
+</header>
+<section id="section-intro">
+<p>yal.core</p>
+<p>Core components of the YAL parser.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+yal.core
+
+Core components of the YAL parser.
+&#34;&#34;&#34;
+
+from dataclasses import dataclass, asdict
+import re
+import yaml
+from pyparsing import Word, alphanums, nums, Group, Literal, OneOrMore, \
+                        Suppress, Optional, Regex, ParseResults
+
+_comment        = Regex(r&#39;\/\/[^\n]*&#39;).suppress() \
+                | Regex(r&#39;\/\*(.*?)\*\/&#39;, flags=re.DOTALL).suppress()
+_module_name    = Word(alphanums + &#34;_&#34;)
+_module_type    = Literal(&#39;STANDARD&#39;) | Literal(&#39;PAD&#39;) | Literal(&#39;GENERAL&#39;) \
+                | Literal(&#39;PARENT&#39;) | Literal(&#39;FEEDTHROUGH&#39;)
+_width          = Word(nums)
+_height         = Word(nums)
+_signal_name    = Word(alphanums + &#39;_&#39;)
+_terminal_type  = Literal(&#39;I&#39;) | Literal(&#39;O&#39;) | Literal(&#39;B&#39;) | Literal(&#39;PI&#39;) \
+                | Literal(&#39;PO&#39;) | Literal(&#39;PB&#39;) | Literal(&#39;F&#39;) | Literal(&#39;PWR&#39;) \
+                | Literal(&#39;GND&#39;)
+_side           = Literal(&#39;BOTTOM&#39;) | Literal(&#39;RIGHT&#39;) \
+                | Literal(&#39;TOP&#39;) | Literal(&#39;LEFT&#39;)
+_layer          = Literal(&#39;PDIFF&#39;) | Literal(&#39;NDIFF&#39;) | Literal(&#39;POLY&#39;) \
+                | Literal(&#39;METAL1&#39;) | Literal(&#39;METAL2&#39;)
+_x_position     = Word(nums + &#39;-&#39;)
+_y_position     = Word(nums + &#39;-&#39;)
+_position       = Word(nums + &#39;-&#39;)
+_instance_name  = Word(alphanums + &#39;_&#39;)
+_x_location     = Word(nums + &#39;-&#39;)
+_y_location     = Word(nums + &#39;-&#39;)
+_current        = Word(nums + &#39;.-&#39;)
+_voltage        = Word(nums + &#39;.-&#39;)
+_maximum_length = Word(nums)
+_reflection     = Literal(&#39;RFLNONE&#39;) | Literal(&#39;RFLY&#39;)
+_rotation       = Literal(&#39;ROT0&#39;) | Literal(&#39;ROT90&#39;) \
+                | Literal(&#39;ROT180&#39;) | Literal(&#39;ROT270&#39;)
+_x              = Word(nums + &#39;-&#39;)
+_y              = Word(nums + &#39;-&#39;)
+_io             = Group( ( _signal_name(&#39;name&#39;) + _terminal_type(&#39;type&#39;)
+                         + ( Group( _x_position(&#39;x&#39;) + _y_position(&#39;y&#39;)
+                                  + Optional(_width(&#39;width&#39;) + _layer(&#39;layer&#39;)) )
+                           | Group( _side(&#39;side&#39;) + _position(&#39;pos&#39;)
+                                  + Optional(_width(&#39;width&#39;) + _layer(&#39;layer&#39;)) )))
+                       + Optional(&#39;CURRENT&#39; + _current(&#39;current&#39;))
+                       + Optional(&#39;VOLTAGE&#39; + _voltage(&#39;voltage&#39;)) )
+_ios            = OneOrMore(_io + Suppress(&#39;;&#39;))
+_dimension      = Group(_x + _y)
+_dimensions     = OneOrMore(_dimension)
+_network        = Group( _instance_name(&#39;name&#39;) + _module_name(&#39;module&#39;)
+                       + OneOrMore(_signal_name)(&#39;signals&#39;) )
+_networks       = OneOrMore(_network + Suppress(&#39;;&#39;))
+_placement      = _instance_name(&#39;name&#39;) \
+                + Group( _x_location + _y_location(&#39;y&#39;)
+                       + Optional(_reflection) + Optional(_rotation)
+                       )(&#39;placement&#39;)
+_placements     = OneOrMore(_placement + Suppress(&#39;;&#39;))
+_critnet        = _signal_name(&#39;name&#39;) + _maximum_length(&#39;len&#39;)
+_critnets       = OneOrMore(_critnet + Suppress(&#39;;&#39;))
+_module         = Group( Literal(&#39;MODULE&#39;) + _module_name(&#39;name&#39;) + Suppress(&#39;;&#39;)
+                       +     Literal(&#39;TYPE&#39;) + _module_type(&#39;type&#39;) + Suppress(&#39;;&#39;)
+                       +     Literal(&#39;DIMENSIONS&#39;) + _dimensions(&#39;dims&#39;) + Suppress(&#39;;&#39;)
+                       +     Suppress(&#39;IOLIST;&#39;)
+                       +         _ios(&#39;terms&#39;)
+                       +     Suppress(&#39;ENDIOLIST;&#39;)
+                       +     Optional( Suppress(&#39;NETWORK;&#39;)
+                                     + _networks(&#39;nets&#39;)
+                                     + Suppress(&#39;ENDNETWORK;&#39;))
+                       +     Optional( Suppress(&#39;PLACEMENT;&#39;)
+                                     + _placements(&#39;placements&#39;)
+                                     + Suppress(&#39;ENDPLACEMENT;&#39;))
+                       +     Optional( Suppress(&#39;CRITICALNETS;&#39;)
+                                     + _critnets(&#39;crits&#39;)
+                                     + Suppress(&#39;ENDCRITICALNETS;&#39;))
+                       + Suppress(&#39;ENDMODULE;&#39;))
+grammar         = OneOrMore(_module).ignore(_comment)
+
+@dataclass
+class Network:
+    &#39;&#39;&#39;
+    The NETWORK section defines the internal connectivity for the module.
+    &#39;&#39;&#39;
+    instance_name: str
+    module_name:   str
+    signal_names:  list[str]
+
+def make_network(parse_result: ParseResults) -&gt; Network:
+    &#39;&#39;&#39;
+    Constructor for the `Network` data class.
+    &#39;&#39;&#39;
+    return Network( parse_result.get(&#39;name&#39;, &#39;NO NAME&#39;)
+                  , parse_result.get(&#39;module&#39;, &#39;NO MODULE&#39;)
+                  , list(parse_result.get(&#39;signals&#39;, [])) )
+
+@dataclass
+class Terminal:
+    &#39;&#39;&#39;
+    This is describes one element of the IOLIST.
+    &#39;&#39;&#39;
+    signal_name:   str
+    terminal_type: str
+    x_position:    int
+    y_position:    int
+    width:         int
+    layer:         str
+    position:      int
+    size:          int
+    side:          str
+
+def make_terminal(parse_result: ParseResults) -&gt; Terminal:
+    &#39;&#39;&#39;
+    Constructor for the `Terminal` data class.
+    &#39;&#39;&#39;
+    return Terminal( parse_result.get(&#39;name&#39;, &#39;NO NAME&#39;)
+                   , parse_result.get(&#39;type&#39;, &#39;NO TYPE&#39;)
+                   , parse_result.get(&#39;x&#39;, None)
+                   , parse_result.get(&#39;y&#39;, None)
+                   , parse_result.get(&#39;width&#39;, None)
+                   , parse_result.get(&#39;layer&#39;, None)
+                   , parse_result.get(&#39;position&#39;, None)
+                   , parse_result.get(&#39;size&#39;, None)
+                   , parse_result.get(&#39;side&#39;, None) )
+
+@dataclass
+class Module:
+    &#39;&#39;&#39;
+    A MODULE as defined by YAL.
+    &#39;&#39;&#39;
+    module_name:   str
+    module_type:   str
+    dimensions:    list[(int,int)]
+    terminals:     list[Terminal]
+    network:       dict[tuple[str,str],list[str]]
+    placement:     dict[str,tuple[int,int,str,str]]
+    critical_nets: dict[str,int]
+
+def make_module(parse_result: ParseResults) -&gt; Module:
+    &#39;&#39;&#39;
+    Constructor for the `Module` data class.
+    &#39;&#39;&#39;
+    return Module( parse_result.get(&#39;name&#39;, &#39;NO NAME&#39;)
+                 , parse_result.get(&#39;type&#39;, &#39;NO TYPE&#39;)
+                 , [tuple(map(int,d)) for d in parse_result.get(&#39;dims&#39;, [])]
+                 , [make_terminal(t) for t in parse_result.get(&#39;terms&#39;, [])]
+                 , [make_network(n) for n in parse_result.get(&#39;nets&#39;, [])]
+                 , { p.get(&#39;name&#39;, &#39;NO NAME&#39;): tuple(p.get(&#39;placement&#39;, []))
+                     for p in parse_result.get(&#39;placements&#39;, []) }
+                 , { c.get(&#39;name&#39;, &#39;NO NAME&#39;): c.get(&#39;len&#39;)
+                    for c in parse_result.get(&#39;crits&#39;, []) })
+
+def parse(file_contents: str) -&gt; list[Module]:
+    &#39;&#39;&#39;
+    Parse a YAL string.
+    &#39;&#39;&#39;
+    return [ make_module(pr) for pr in grammar.parseString(file_contents) ]
+
+def read(file_name: str) -&gt; list[Module]:
+    &#39;&#39;&#39;
+    Read .yal file and parse its content.
+    &#39;&#39;&#39;
+    with open(file_name, &#39;r&#39;) as yal_file:
+        yal_input = yal_file.read()
+    return parse(yal_input)
+
+def as_dict(module: Module) -&gt; dict:
+    &#39;&#39;&#39;
+    Convert a Module to a dictionary.
+    &#39;&#39;&#39;
+    mod_dict = asdict(module)
+    mod_dict[&#39;dimensions&#39;] = [{&#39;x&#39;: x, &#39;y&#39;: y} for x,y in mod_dict[&#39;dimensions&#39;]]
+    return mod_dict
+
+def as_dicts(modules: list[Module]) -&gt; dict:
+    &#39;&#39;&#39;
+    Convert a list of Modules to a list of dictionaries.
+    &#39;&#39;&#39;
+    return [ as_dict(m) for m in modules ]
+
+def as_yaml(modules: list[Module]) -&gt; str:
+    &#39;&#39;&#39;
+    Convert a list of modules to YAML.
+    &#39;&#39;&#39;
+    return yaml.dump([{&#39;module&#39; : m} for m in as_dicts(modules)])</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="yal.core.as_dict"><code class="name flex">
+<span>def <span class="ident">as_dict</span></span>(<span>module: <a title="yal.core.Module" href="#yal.core.Module">Module</a>) ‑> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert a Module to a dictionary.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_dict(module: Module) -&gt; dict:
+    &#39;&#39;&#39;
+    Convert a Module to a dictionary.
+    &#39;&#39;&#39;
+    mod_dict = asdict(module)
+    mod_dict[&#39;dimensions&#39;] = [{&#39;x&#39;: x, &#39;y&#39;: y} for x,y in mod_dict[&#39;dimensions&#39;]]
+    return mod_dict</code></pre>
+</details>
+</dd>
+<dt id="yal.core.as_dicts"><code class="name flex">
+<span>def <span class="ident">as_dicts</span></span>(<span>modules: list[<a title="yal.core.Module" href="#yal.core.Module">Module</a>]) ‑> dict</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert a list of Modules to a list of dictionaries.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_dicts(modules: list[Module]) -&gt; dict:
+    &#39;&#39;&#39;
+    Convert a list of Modules to a list of dictionaries.
+    &#39;&#39;&#39;
+    return [ as_dict(m) for m in modules ]</code></pre>
+</details>
+</dd>
+<dt id="yal.core.as_yaml"><code class="name flex">
+<span>def <span class="ident">as_yaml</span></span>(<span>modules: list[<a title="yal.core.Module" href="#yal.core.Module">Module</a>]) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Convert a list of modules to YAML.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_yaml(modules: list[Module]) -&gt; str:
+    &#39;&#39;&#39;
+    Convert a list of modules to YAML.
+    &#39;&#39;&#39;
+    return yaml.dump([{&#39;module&#39; : m} for m in as_dicts(modules)])</code></pre>
+</details>
+</dd>
+<dt id="yal.core.make_module"><code class="name flex">
+<span>def <span class="ident">make_module</span></span>(<span>parse_result: pyparsing.results.ParseResults) ‑> <a title="yal.core.Module" href="#yal.core.Module">Module</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructor for the <code><a title="yal.core.Module" href="#yal.core.Module">Module</a></code> data class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_module(parse_result: ParseResults) -&gt; Module:
+    &#39;&#39;&#39;
+    Constructor for the `Module` data class.
+    &#39;&#39;&#39;
+    return Module( parse_result.get(&#39;name&#39;, &#39;NO NAME&#39;)
+                 , parse_result.get(&#39;type&#39;, &#39;NO TYPE&#39;)
+                 , [tuple(map(int,d)) for d in parse_result.get(&#39;dims&#39;, [])]
+                 , [make_terminal(t) for t in parse_result.get(&#39;terms&#39;, [])]
+                 , [make_network(n) for n in parse_result.get(&#39;nets&#39;, [])]
+                 , { p.get(&#39;name&#39;, &#39;NO NAME&#39;): tuple(p.get(&#39;placement&#39;, []))
+                     for p in parse_result.get(&#39;placements&#39;, []) }
+                 , { c.get(&#39;name&#39;, &#39;NO NAME&#39;): c.get(&#39;len&#39;)
+                    for c in parse_result.get(&#39;crits&#39;, []) })</code></pre>
+</details>
+</dd>
+<dt id="yal.core.make_network"><code class="name flex">
+<span>def <span class="ident">make_network</span></span>(<span>parse_result: pyparsing.results.ParseResults) ‑> <a title="yal.core.Network" href="#yal.core.Network">Network</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructor for the <code><a title="yal.core.Network" href="#yal.core.Network">Network</a></code> data class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_network(parse_result: ParseResults) -&gt; Network:
+    &#39;&#39;&#39;
+    Constructor for the `Network` data class.
+    &#39;&#39;&#39;
+    return Network( parse_result.get(&#39;name&#39;, &#39;NO NAME&#39;)
+                  , parse_result.get(&#39;module&#39;, &#39;NO MODULE&#39;)
+                  , list(parse_result.get(&#39;signals&#39;, [])) )</code></pre>
+</details>
+</dd>
+<dt id="yal.core.make_terminal"><code class="name flex">
+<span>def <span class="ident">make_terminal</span></span>(<span>parse_result: pyparsing.results.ParseResults) ‑> <a title="yal.core.Terminal" href="#yal.core.Terminal">Terminal</a></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructor for the <code><a title="yal.core.Terminal" href="#yal.core.Terminal">Terminal</a></code> data class.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def make_terminal(parse_result: ParseResults) -&gt; Terminal:
+    &#39;&#39;&#39;
+    Constructor for the `Terminal` data class.
+    &#39;&#39;&#39;
+    return Terminal( parse_result.get(&#39;name&#39;, &#39;NO NAME&#39;)
+                   , parse_result.get(&#39;type&#39;, &#39;NO TYPE&#39;)
+                   , parse_result.get(&#39;x&#39;, None)
+                   , parse_result.get(&#39;y&#39;, None)
+                   , parse_result.get(&#39;width&#39;, None)
+                   , parse_result.get(&#39;layer&#39;, None)
+                   , parse_result.get(&#39;position&#39;, None)
+                   , parse_result.get(&#39;size&#39;, None)
+                   , parse_result.get(&#39;side&#39;, None) )</code></pre>
+</details>
+</dd>
+<dt id="yal.core.parse"><code class="name flex">
+<span>def <span class="ident">parse</span></span>(<span>file_contents: str) ‑> list[<a title="yal.core.Module" href="#yal.core.Module">Module</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Parse a YAL string.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def parse(file_contents: str) -&gt; list[Module]:
+    &#39;&#39;&#39;
+    Parse a YAL string.
+    &#39;&#39;&#39;
+    return [ make_module(pr) for pr in grammar.parseString(file_contents) ]</code></pre>
+</details>
+</dd>
+<dt id="yal.core.read"><code class="name flex">
+<span>def <span class="ident">read</span></span>(<span>file_name: str) ‑> list[<a title="yal.core.Module" href="#yal.core.Module">Module</a>]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Read .yal file and parse its content.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def read(file_name: str) -&gt; list[Module]:
+    &#39;&#39;&#39;
+    Read .yal file and parse its content.
+    &#39;&#39;&#39;
+    with open(file_name, &#39;r&#39;) as yal_file:
+        yal_input = yal_file.read()
+    return parse(yal_input)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="yal.core.Module"><code class="flex name class">
+<span>class <span class="ident">Module</span></span>
+<span>(</span><span>module_name: str, module_type: str, dimensions: list[int, int], terminals: list[<a title="yal.core.Terminal" href="#yal.core.Terminal">Terminal</a>], network: dict[tuple[str, str], list[str]], placement: dict[str, tuple[int, int, str, str]], critical_nets: dict[str, int])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A MODULE as defined by YAL.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Module:
+    &#39;&#39;&#39;
+    A MODULE as defined by YAL.
+    &#39;&#39;&#39;
+    module_name:   str
+    module_type:   str
+    dimensions:    list[(int,int)]
+    terminals:     list[Terminal]
+    network:       dict[tuple[str,str],list[str]]
+    placement:     dict[str,tuple[int,int,str,str]]
+    critical_nets: dict[str,int]</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="yal.core.Module.critical_nets"><code class="name">var <span class="ident">critical_nets</span> : dict[str, int]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Module.dimensions"><code class="name">var <span class="ident">dimensions</span> : list[int, int]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Module.module_name"><code class="name">var <span class="ident">module_name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Module.module_type"><code class="name">var <span class="ident">module_type</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Module.network"><code class="name">var <span class="ident">network</span> : dict[tuple[str, str], list[str]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Module.placement"><code class="name">var <span class="ident">placement</span> : dict[str, tuple[int, int, str, str]]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Module.terminals"><code class="name">var <span class="ident">terminals</span> : list[<a title="yal.core.Terminal" href="#yal.core.Terminal">Terminal</a>]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="yal.core.Network"><code class="flex name class">
+<span>class <span class="ident">Network</span></span>
+<span>(</span><span>instance_name: str, module_name: str, signal_names: list[str])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The NETWORK section defines the internal connectivity for the module.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Network:
+    &#39;&#39;&#39;
+    The NETWORK section defines the internal connectivity for the module.
+    &#39;&#39;&#39;
+    instance_name: str
+    module_name:   str
+    signal_names:  list[str]</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="yal.core.Network.instance_name"><code class="name">var <span class="ident">instance_name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Network.module_name"><code class="name">var <span class="ident">module_name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Network.signal_names"><code class="name">var <span class="ident">signal_names</span> : list[str]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="yal.core.Terminal"><code class="flex name class">
+<span>class <span class="ident">Terminal</span></span>
+<span>(</span><span>signal_name: str, terminal_type: str, x_position: int, y_position: int, width: int, layer: str, position: int, size: int, side: str)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is describes one element of the IOLIST.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@dataclass
+class Terminal:
+    &#39;&#39;&#39;
+    This is describes one element of the IOLIST.
+    &#39;&#39;&#39;
+    signal_name:   str
+    terminal_type: str
+    x_position:    int
+    y_position:    int
+    width:         int
+    layer:         str
+    position:      int
+    size:          int
+    side:          str</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="yal.core.Terminal.layer"><code class="name">var <span class="ident">layer</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.position"><code class="name">var <span class="ident">position</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.side"><code class="name">var <span class="ident">side</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.signal_name"><code class="name">var <span class="ident">signal_name</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.size"><code class="name">var <span class="ident">size</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.terminal_type"><code class="name">var <span class="ident">terminal_type</span> : str</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.width"><code class="name">var <span class="ident">width</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.x_position"><code class="name">var <span class="ident">x_position</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="yal.core.Terminal.y_position"><code class="name">var <span class="ident">y_position</span> : int</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="yal" href="index.html">yal</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="yal.core.as_dict" href="#yal.core.as_dict">as_dict</a></code></li>
+<li><code><a title="yal.core.as_dicts" href="#yal.core.as_dicts">as_dicts</a></code></li>
+<li><code><a title="yal.core.as_yaml" href="#yal.core.as_yaml">as_yaml</a></code></li>
+<li><code><a title="yal.core.make_module" href="#yal.core.make_module">make_module</a></code></li>
+<li><code><a title="yal.core.make_network" href="#yal.core.make_network">make_network</a></code></li>
+<li><code><a title="yal.core.make_terminal" href="#yal.core.make_terminal">make_terminal</a></code></li>
+<li><code><a title="yal.core.parse" href="#yal.core.parse">parse</a></code></li>
+<li><code><a title="yal.core.read" href="#yal.core.read">read</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="yal.core.Module" href="#yal.core.Module">Module</a></code></h4>
+<ul class="two-column">
+<li><code><a title="yal.core.Module.critical_nets" href="#yal.core.Module.critical_nets">critical_nets</a></code></li>
+<li><code><a title="yal.core.Module.dimensions" href="#yal.core.Module.dimensions">dimensions</a></code></li>
+<li><code><a title="yal.core.Module.module_name" href="#yal.core.Module.module_name">module_name</a></code></li>
+<li><code><a title="yal.core.Module.module_type" href="#yal.core.Module.module_type">module_type</a></code></li>
+<li><code><a title="yal.core.Module.network" href="#yal.core.Module.network">network</a></code></li>
+<li><code><a title="yal.core.Module.placement" href="#yal.core.Module.placement">placement</a></code></li>
+<li><code><a title="yal.core.Module.terminals" href="#yal.core.Module.terminals">terminals</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="yal.core.Network" href="#yal.core.Network">Network</a></code></h4>
+<ul class="">
+<li><code><a title="yal.core.Network.instance_name" href="#yal.core.Network.instance_name">instance_name</a></code></li>
+<li><code><a title="yal.core.Network.module_name" href="#yal.core.Network.module_name">module_name</a></code></li>
+<li><code><a title="yal.core.Network.signal_names" href="#yal.core.Network.signal_names">signal_names</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="yal.core.Terminal" href="#yal.core.Terminal">Terminal</a></code></h4>
+<ul class="two-column">
+<li><code><a title="yal.core.Terminal.layer" href="#yal.core.Terminal.layer">layer</a></code></li>
+<li><code><a title="yal.core.Terminal.position" href="#yal.core.Terminal.position">position</a></code></li>
+<li><code><a title="yal.core.Terminal.side" href="#yal.core.Terminal.side">side</a></code></li>
+<li><code><a title="yal.core.Terminal.signal_name" href="#yal.core.Terminal.signal_name">signal_name</a></code></li>
+<li><code><a title="yal.core.Terminal.size" href="#yal.core.Terminal.size">size</a></code></li>
+<li><code><a title="yal.core.Terminal.terminal_type" href="#yal.core.Terminal.terminal_type">terminal_type</a></code></li>
+<li><code><a title="yal.core.Terminal.width" href="#yal.core.Terminal.width">width</a></code></li>
+<li><code><a title="yal.core.Terminal.x_position" href="#yal.core.Terminal.x_position">x_position</a></code></li>
+<li><code><a title="yal.core.Terminal.y_position" href="#yal.core.Terminal.y_position">y_position</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
