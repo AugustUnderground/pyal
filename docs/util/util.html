@@ -50,6 +50,13 @@ def _init_participant():
            , &#39;turmoil&#39;:     0
            , &#39;wounds&#39;:      [] }
 
+def random_color() -&gt; str:
+    &#34;&#34;&#34;
+    Generate a random color.
+    &#34;&#34;&#34;
+    col = format(randrange(0, int(2 ** 24 - 1), 1), &#39;x&#39;)
+    return f&#39;#{col}&#39;
+
 def randomize_placement( participant:dict, x_bound: int = 120, y_bound: int = 120
                        ) -&gt; dict:
     &#34;&#34;&#34;
@@ -70,7 +77,7 @@ def randomize_placement( participant:dict, x_bound: int = 120, y_bound: int = 12
     return participant | { &#39;xmin&#39;: x_min, &#39;ymin&#39;: y_min }
 
 def as_participant( module: core.Module, opt_fields: list[str] = None
-                  ) -&gt; dict:
+                  , colorize: bool = True ) -&gt; dict:
     &#34;&#34;&#34;
     Convert a `Module` dataclass object to a `dict` participant.
 
@@ -82,6 +89,8 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
             in the participant dict. Options are &#39;module_type&#39;, &#39;dimensions&#39;,
             &#39;terminals&#39;, &#39;network&#39;, &#39;placement&#39; and &#39;critical_nets&#39;. Default is
             `None`.
+
+        `colorize`: Whether to add a random color to the participant (optional, default = True)
 
     Return:
 
@@ -107,18 +116,22 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
     x_max,y_max = dims[-1]
     width       = x_max - x_min
     height      = y_max - y_min
+    idx         = module.module_name
     mod_dict    = {k: v for k,v in core.as_dict(module).items()
                         if (opt_fields and k in opt_fields)}
     participant = mod_dict | _init_participant() \
-                | { &#39;idx&#39;:    module.module_name
+                | { &#39;idx&#39;:    idx
                   , &#39;width&#39;:  width
                   , &#39;height&#39;: height
                   , &#39;xmin&#39;:   x_min
-                  , &#39;ymin&#39;:   y_min }
+                  , &#39;ymin&#39;:   y_min
+                  , &#39;color&#39;:  random_color() if colorize and (idx != &#39;bound&#39;) else None }
+
     return participant
 
 def as_participants( modules: list[core.Module]
                    , rng_placement: bool = True
+                   , colorize: bool      = True
                    , module_type: bool   = False
                    , dimensions: bool    = False
                    , terminals: bool     = False
@@ -135,6 +148,8 @@ def as_participants( modules: list[core.Module]
 
         `rng_placement`: A boolean indicating whether the initial placement
             shall be randomized. (optional, default = True)
+
+        `colorize`: Whether to add a random color to the participant (optional, default = True)
 
         `module_type`: Whether to retain the &#39;module_type&#39; field (optional, default = False)
 
@@ -156,7 +171,7 @@ def as_participants( modules: list[core.Module]
 
     fields = [f for c,f in list(all_fields) if c]
 
-    parts = [as_participant(m, opt_fields=fields) for m in modules]
+    parts = [as_participant(m, opt_fields=fields, colorize=colorize) for m in modules]
 
     if rng_placement:
         bound        = [p for p in parts if p[&#39;idx&#39;] == &#39;bound&#39;]
@@ -181,7 +196,7 @@ def as_participants( modules: list[core.Module]
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="yal.util.util.as_participant"><code class="name flex">
-<span>def <span class="ident">as_participant</span></span>(<span>module: <a title="yal.core.Module" href="../core.html#yal.core.Module">Module</a>, opt_fields: list[str] = None) ‑> dict</span>
+<span>def <span class="ident">as_participant</span></span>(<span>module: <a title="yal.core.Module" href="../core.html#yal.core.Module">Module</a>, opt_fields: list[str] = None, colorize: bool = True) ‑> dict</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Convert a <code>Module</code> dataclass object to a <code>dict</code> participant.</p>
@@ -191,6 +206,7 @@ def as_participants( modules: list[core.Module]
 in the participant dict. Options are 'module_type', 'dimensions',
 'terminals', 'network', 'placement' and 'critical_nets'. Default is
 <code>None</code>.</p>
+<p><code>colorize</code>: Whether to add a random color to the participant (optional, default = True)</p>
 <h2 id="return">Return</h2>
 <p>A dictionary of the form:</p>
 <pre><code>{ 'idx':         Module.module_name
@@ -210,7 +226,7 @@ in the participant dict. Options are 'module_type', 'dimensions',
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def as_participant( module: core.Module, opt_fields: list[str] = None
-                  ) -&gt; dict:
+                  , colorize: bool = True ) -&gt; dict:
     &#34;&#34;&#34;
     Convert a `Module` dataclass object to a `dict` participant.
 
@@ -222,6 +238,8 @@ in the participant dict. Options are 'module_type', 'dimensions',
             in the participant dict. Options are &#39;module_type&#39;, &#39;dimensions&#39;,
             &#39;terminals&#39;, &#39;network&#39;, &#39;placement&#39; and &#39;critical_nets&#39;. Default is
             `None`.
+
+        `colorize`: Whether to add a random color to the participant (optional, default = True)
 
     Return:
 
@@ -247,19 +265,22 @@ in the participant dict. Options are 'module_type', 'dimensions',
     x_max,y_max = dims[-1]
     width       = x_max - x_min
     height      = y_max - y_min
+    idx         = module.module_name
     mod_dict    = {k: v for k,v in core.as_dict(module).items()
                         if (opt_fields and k in opt_fields)}
     participant = mod_dict | _init_participant() \
-                | { &#39;idx&#39;:    module.module_name
+                | { &#39;idx&#39;:    idx
                   , &#39;width&#39;:  width
                   , &#39;height&#39;: height
                   , &#39;xmin&#39;:   x_min
-                  , &#39;ymin&#39;:   y_min }
+                  , &#39;ymin&#39;:   y_min
+                  , &#39;color&#39;:  random_color() if colorize and (idx != &#39;bound&#39;) else None }
+
     return participant</code></pre>
 </details>
 </dd>
 <dt id="yal.util.util.as_participants"><code class="name flex">
-<span>def <span class="ident">as_participants</span></span>(<span>modules: list[<a title="yal.core.Module" href="../core.html#yal.core.Module">Module</a>], rng_placement: bool = True, module_type: bool = False, dimensions: bool = False, terminals: bool = False, network: bool = True, placement: bool = False, critical_nets: bool = False) ‑> list[dict]</span>
+<span>def <span class="ident">as_participants</span></span>(<span>modules: list[<a title="yal.core.Module" href="../core.html#yal.core.Module">Module</a>], rng_placement: bool = True, colorize: bool = True, module_type: bool = False, dimensions: bool = False, terminals: bool = False, network: bool = True, placement: bool = False, critical_nets: bool = False) ‑> list[dict]</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Read a .yal file and convert it to a list of dictionaries.</p>
@@ -267,6 +288,7 @@ in the participant dict. Options are 'module_type', 'dimensions',
 <p><code>modules</code>: A list of <code>Module</code> objects.</p>
 <p><code>rng_placement</code>: A boolean indicating whether the initial placement
 shall be randomized. (optional, default = True)</p>
+<p><code>colorize</code>: Whether to add a random color to the participant (optional, default = True)</p>
 <p><code>module_type</code>: Whether to retain the 'module_type' field (optional, default = False)</p>
 <p><code>dimensions</code>: Whether to retain the 'dimensions' field (optional, default = False)</p>
 <p><code>terminals</code>: Whether to retain the 'terminals' field (optional, default = False)</p>
@@ -279,6 +301,7 @@ shall be randomized. (optional, default = True)</p>
 </summary>
 <pre><code class="python">def as_participants( modules: list[core.Module]
                    , rng_placement: bool = True
+                   , colorize: bool      = True
                    , module_type: bool   = False
                    , dimensions: bool    = False
                    , terminals: bool     = False
@@ -295,6 +318,8 @@ shall be randomized. (optional, default = True)</p>
 
         `rng_placement`: A boolean indicating whether the initial placement
             shall be randomized. (optional, default = True)
+
+        `colorize`: Whether to add a random color to the participant (optional, default = True)
 
         `module_type`: Whether to retain the &#39;module_type&#39; field (optional, default = False)
 
@@ -316,7 +341,7 @@ shall be randomized. (optional, default = True)</p>
 
     fields = [f for c,f in list(all_fields) if c]
 
-    parts = [as_participant(m, opt_fields=fields) for m in modules]
+    parts = [as_participant(m, opt_fields=fields, colorize=colorize) for m in modules]
 
     if rng_placement:
         bound        = [p for p in parts if p[&#39;idx&#39;] == &#39;bound&#39;]
@@ -331,6 +356,23 @@ shall be randomized. (optional, default = True)</p>
         participants = parts
 
     return participants</code></pre>
+</details>
+</dd>
+<dt id="yal.util.util.random_color"><code class="name flex">
+<span>def <span class="ident">random_color</span></span>(<span>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a random color.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def random_color() -&gt; str:
+    &#34;&#34;&#34;
+    Generate a random color.
+    &#34;&#34;&#34;
+    col = format(randrange(0, int(2 ** 24 - 1), 1), &#39;x&#39;)
+    return f&#39;#{col}&#39;</code></pre>
 </details>
 </dd>
 <dt id="yal.util.util.randomize_placement"><code class="name flex">
@@ -386,6 +428,7 @@ shall be randomized. (optional, default = True)</p>
 <ul class="">
 <li><code><a title="yal.util.util.as_participant" href="#yal.util.util.as_participant">as_participant</a></code></li>
 <li><code><a title="yal.util.util.as_participants" href="#yal.util.util.as_participants">as_participants</a></code></li>
+<li><code><a title="yal.util.util.random_color" href="#yal.util.util.random_color">random_color</a></code></li>
 <li><code><a title="yal.util.util.randomize_placement" href="#yal.util.util.randomize_placement">randomize_placement</a></code></li>
 </ul>
 </li>

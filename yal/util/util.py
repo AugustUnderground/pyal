@@ -20,6 +20,13 @@ def _init_participant():
            , 'turmoil':     0
            , 'wounds':      [] }
 
+def random_color() -> str:
+    """
+    Generate a random color.
+    """
+    col = format(randrange(0, int(2 ** 24 - 1), 1), 'x')
+    return f'#{col}'
+
 def randomize_placement( participant:dict, x_bound: int = 120, y_bound: int = 120
                        ) -> dict:
     """
@@ -40,7 +47,7 @@ def randomize_placement( participant:dict, x_bound: int = 120, y_bound: int = 12
     return participant | { 'xmin': x_min, 'ymin': y_min }
 
 def as_participant( module: core.Module, opt_fields: list[str] = None
-                  ) -> dict:
+                  , colorize: bool = True ) -> dict:
     """
     Convert a `Module` dataclass object to a `dict` participant.
 
@@ -52,6 +59,8 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
             in the participant dict. Options are 'module_type', 'dimensions',
             'terminals', 'network', 'placement' and 'critical_nets'. Default is
             `None`.
+
+        `colorize`: Whether to add a random color to the participant (optional, default = True)
 
     Return:
 
@@ -77,18 +86,22 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
     x_max,y_max = dims[-1]
     width       = x_max - x_min
     height      = y_max - y_min
+    idx         = module.module_name
     mod_dict    = {k: v for k,v in core.as_dict(module).items()
                         if (opt_fields and k in opt_fields)}
     participant = mod_dict | _init_participant() \
-                | { 'idx':    module.module_name
+                | { 'idx':    idx
                   , 'width':  width
                   , 'height': height
                   , 'xmin':   x_min
-                  , 'ymin':   y_min }
+                  , 'ymin':   y_min
+                  , 'color':  random_color() if colorize and (idx != 'bound') else None }
+
     return participant
 
 def as_participants( modules: list[core.Module]
                    , rng_placement: bool = True
+                   , colorize: bool      = True
                    , module_type: bool   = False
                    , dimensions: bool    = False
                    , terminals: bool     = False
@@ -105,6 +118,8 @@ def as_participants( modules: list[core.Module]
 
         `rng_placement`: A boolean indicating whether the initial placement
             shall be randomized. (optional, default = True)
+
+        `colorize`: Whether to add a random color to the participant (optional, default = True)
 
         `module_type`: Whether to retain the 'module_type' field (optional, default = False)
 
@@ -126,7 +141,7 @@ def as_participants( modules: list[core.Module]
 
     fields = [f for c,f in list(all_fields) if c]
 
-    parts = [as_participant(m, opt_fields=fields) for m in modules]
+    parts = [as_participant(m, opt_fields=fields, colorize=colorize) for m in modules]
 
     if rng_placement:
         bound        = [p for p in parts if p['idx'] == 'bound']
