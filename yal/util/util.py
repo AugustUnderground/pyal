@@ -96,6 +96,16 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
 
     return participant
 
+def connects(participant, participants) -> set[str]:
+    """
+    Weighted connections between participants
+    """
+    name = participant['module_name']
+    sigs = set(participant.get('signal_names', []))
+    cons =  { p['module_name']: len((set(p.get('signal_names', [])) & sigs) - {'G', 'P'})
+              for p in participants if p['module_name'] not in [name, 'bound'] }
+    return cons
+
 def as_participants( modules: list[core.Module]
                    , rng_placement: bool = True
                    , colorize: bool      = True
@@ -150,4 +160,8 @@ def as_participants( modules: list[core.Module]
     else:
         participants = parts
 
-    return participants
+    bound   = [p for p in participants if p['idx'] == 'bound']
+    network = bound[0].get('network', []) if bound else []
+    cons    = {n['module_name'] : connects(n, network) for n in network}
+
+    return [p | {'connections': cons.get(p['idx'])} for p in participants]
