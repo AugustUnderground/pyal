@@ -61,21 +61,21 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
 
     Return:
 
-        A dictionary of the form:
+    A dictionary of the form:
 
-        ```
-        { 'idx':         Module.module_name
-        , 'xmin':        <lower left x coordinate>
-        , 'ymin':        <lower left y coordinate>
-        , 'width':       <width of module>
-        , 'height':      <height of module>
-        , 'clashes':     {}
-        , 'aversions':   {}
-        , 'inference':   0
-        , 'connections': {<other idx>: <weight>}
-        , 'turmoil':     0
-        , 'wounds':      [] }
-        ```
+    ```
+    { 'idx':         Module.module_name
+    , 'xmin':        <lower left x coordinate>
+    , 'ymin':        <lower left y coordinate>
+    , 'width':       <width of module>
+    , 'height':      <height of module>
+    , 'clashes':     {}
+    , 'aversions':   {}
+    , 'inference':   0
+    , 'connections': {<other idx>: <weight>}
+    , 'turmoil':     0
+    , 'wounds':      [] }
+    ```
     """
 
     dims        = sorted(module.dimensions)
@@ -96,9 +96,23 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
 
     return participant
 
-def connects(participant, participants) -> set[str]:
+def connects(participant: dict, participants: list[dict]) -> dict[str,int]:
     """
     Weighted connections between participants
+
+    Arguments:
+
+    - `participant`: The participant in question
+
+    - `participants`: Other participants (can include the former)
+
+    Return:
+
+    A dictionary of the form:
+
+    ```
+    {'other participant': <weight of connection>}
+    ```
     """
     name = participant['module_name']
     sigs = set(participant.get('signal_names', []))
@@ -137,6 +151,10 @@ def as_participants( modules: list[core.Module]
         field (optional, default = `False`)
     - `critical_nets`: Whether to retain the `yal.core.Module.critical_nets` field
         (optional, default = `False`)
+
+    Return:
+    
+    A list of participant dictionaries.
     """
 
     all_fields = zip( [ module_type, dimensions, terminals

@@ -91,21 +91,21 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
 
     Return:
 
-        A dictionary of the form:
+    A dictionary of the form:
 
-        ```
-        { &#39;idx&#39;:         Module.module_name
-        , &#39;xmin&#39;:        &lt;lower left x coordinate&gt;
-        , &#39;ymin&#39;:        &lt;lower left y coordinate&gt;
-        , &#39;width&#39;:       &lt;width of module&gt;
-        , &#39;height&#39;:      &lt;height of module&gt;
-        , &#39;clashes&#39;:     {}
-        , &#39;aversions&#39;:   {}
-        , &#39;inference&#39;:   0
-        , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
-        , &#39;turmoil&#39;:     0
-        , &#39;wounds&#39;:      [] }
-        ```
+    ```
+    { &#39;idx&#39;:         Module.module_name
+    , &#39;xmin&#39;:        &lt;lower left x coordinate&gt;
+    , &#39;ymin&#39;:        &lt;lower left y coordinate&gt;
+    , &#39;width&#39;:       &lt;width of module&gt;
+    , &#39;height&#39;:      &lt;height of module&gt;
+    , &#39;clashes&#39;:     {}
+    , &#39;aversions&#39;:   {}
+    , &#39;inference&#39;:   0
+    , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
+    , &#39;turmoil&#39;:     0
+    , &#39;wounds&#39;:      [] }
+    ```
     &#34;&#34;&#34;
 
     dims        = sorted(module.dimensions)
@@ -126,9 +126,23 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
 
     return participant
 
-def connects(participant, participants) -&gt; set[str]:
+def connects(participant: dict, participants: list[dict]) -&gt; dict[str,int]:
     &#34;&#34;&#34;
     Weighted connections between participants
+
+    Arguments:
+
+    - `participant`: The participant in question
+
+    - `participants`: Other participants (can include the former)
+
+    Return:
+
+    A dictionary of the form:
+
+    ```
+    {&#39;other participant&#39;: &lt;weight of connection&gt;}
+    ```
     &#34;&#34;&#34;
     name = participant[&#39;module_name&#39;]
     sigs = set(participant.get(&#39;signal_names&#39;, []))
@@ -167,6 +181,10 @@ def as_participants( modules: list[core.Module]
         field (optional, default = `False`)
     - `critical_nets`: Whether to retain the `yal.core.Module.critical_nets` field
         (optional, default = `False`)
+
+    Return:
+    
+    A list of participant dictionaries.
     &#34;&#34;&#34;
 
     all_fields = zip( [ module_type, dimensions, terminals
@@ -219,7 +237,7 @@ to retain in the participant dict. Options are <code>'module_type'</code>,
 <li><code>colorize</code>: Whether to add a random color to the participant. Otherwise
 the <code>'color'</code> field is <code>None</code>. (optional, default = True)</li>
 </ul>
-<h2 id="return">Return</h2>
+<p>Return:</p>
 <p>A dictionary of the form:</p>
 <pre><code>{ 'idx':         Module.module_name
 , 'xmin':        &lt;lower left x coordinate&gt;
@@ -254,21 +272,21 @@ the <code>'color'</code> field is <code>None</code>. (optional, default = True)<
 
     Return:
 
-        A dictionary of the form:
+    A dictionary of the form:
 
-        ```
-        { &#39;idx&#39;:         Module.module_name
-        , &#39;xmin&#39;:        &lt;lower left x coordinate&gt;
-        , &#39;ymin&#39;:        &lt;lower left y coordinate&gt;
-        , &#39;width&#39;:       &lt;width of module&gt;
-        , &#39;height&#39;:      &lt;height of module&gt;
-        , &#39;clashes&#39;:     {}
-        , &#39;aversions&#39;:   {}
-        , &#39;inference&#39;:   0
-        , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
-        , &#39;turmoil&#39;:     0
-        , &#39;wounds&#39;:      [] }
-        ```
+    ```
+    { &#39;idx&#39;:         Module.module_name
+    , &#39;xmin&#39;:        &lt;lower left x coordinate&gt;
+    , &#39;ymin&#39;:        &lt;lower left y coordinate&gt;
+    , &#39;width&#39;:       &lt;width of module&gt;
+    , &#39;height&#39;:      &lt;height of module&gt;
+    , &#39;clashes&#39;:     {}
+    , &#39;aversions&#39;:   {}
+    , &#39;inference&#39;:   0
+    , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
+    , &#39;turmoil&#39;:     0
+    , &#39;wounds&#39;:      [] }
+    ```
     &#34;&#34;&#34;
 
     dims        = sorted(module.dimensions)
@@ -313,7 +331,9 @@ shall be randomized. (optional, default = <code>True</code>)</li>
 field (optional, default = <code>False</code>)</li>
 <li><code>critical_nets</code>: Whether to retain the <code><a title="yal.core.Module.critical_nets" href="../core.html#yal.core.Module.critical_nets">Module.critical_nets</a></code> field
 (optional, default = <code>False</code>)</li>
-</ul></div>
+</ul>
+<p>Return:</p>
+<p>A list of participant dictionaries.</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -349,6 +369,10 @@ field (optional, default = <code>False</code>)</li>
         field (optional, default = `False`)
     - `critical_nets`: Whether to retain the `yal.core.Module.critical_nets` field
         (optional, default = `False`)
+
+    Return:
+    
+    A list of participant dictionaries.
     &#34;&#34;&#34;
 
     all_fields = zip( [ module_type, dimensions, terminals
@@ -380,17 +404,44 @@ field (optional, default = <code>False</code>)</li>
 </details>
 </dd>
 <dt id="yal.util.util.connects"><code class="name flex">
-<span>def <span class="ident">connects</span></span>(<span>participant, participants) ‑> set[str]</span>
+<span>def <span class="ident">connects</span></span>(<span>participant: dict, participants: list[dict]) ‑> dict[str, int]</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Weighted connections between participants</p></div>
+<div class="desc"><p>Weighted connections between participants</p>
+<p>Arguments:</p>
+<ul>
+<li>
+<p><code>participant</code>: The participant in question</p>
+</li>
+<li>
+<p><code>participants</code>: Other participants (can include the former)</p>
+</li>
+</ul>
+<p>Return:</p>
+<p>A dictionary of the form:</p>
+<pre><code>{'other participant': &lt;weight of connection&gt;}
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def connects(participant, participants) -&gt; set[str]:
+<pre><code class="python">def connects(participant: dict, participants: list[dict]) -&gt; dict[str,int]:
     &#34;&#34;&#34;
     Weighted connections between participants
+
+    Arguments:
+
+    - `participant`: The participant in question
+
+    - `participants`: Other participants (can include the former)
+
+    Return:
+
+    A dictionary of the form:
+
+    ```
+    {&#39;other participant&#39;: &lt;weight of connection&gt;}
+    ```
     &#34;&#34;&#34;
     name = participant[&#39;module_name&#39;]
     sigs = set(participant.get(&#39;signal_names&#39;, []))
