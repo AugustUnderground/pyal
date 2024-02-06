@@ -102,7 +102,7 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
         , &#39;clashes&#39;:     {}
         , &#39;aversions&#39;:   {}
         , &#39;inference&#39;:   0
-        , &#39;connections&#39;: {}
+        , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
         , &#39;turmoil&#39;:     0
         , &#39;wounds&#39;:      [] }
         ```
@@ -125,6 +125,16 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
                   , &#39;color&#39;:  random_color() if colorize and (idx != &#39;bound&#39;) else None }
 
     return participant
+
+def connects(participant, participants) -&gt; set[str]:
+    &#34;&#34;&#34;
+    Weighted connections between participants
+    &#34;&#34;&#34;
+    name = participant[&#39;module_name&#39;]
+    sigs = set(participant.get(&#39;signal_names&#39;, []))
+    cons =  { p[&#39;module_name&#39;]: len((set(p.get(&#39;signal_names&#39;, [])) &amp; sigs) - {&#39;G&#39;, &#39;P&#39;})
+              for p in participants if p[&#39;module_name&#39;] not in [name, &#39;bound&#39;] }
+    return cons
 
 def as_participants( modules: list[core.Module]
                    , rng_placement: bool = True
@@ -180,7 +190,11 @@ def as_participants( modules: list[core.Module]
     else:
         participants = parts
 
-    return participants</code></pre>
+    bound   = [p for p in participants if p[&#39;idx&#39;] == &#39;bound&#39;]
+    network = bound[0].get(&#39;network&#39;, []) if bound else []
+    cons    = {n[&#39;module_name&#39;] : connects(n, network) for n in network}
+
+    return [p | {&#39;connections&#39;: cons.get(p[&#39;idx&#39;])} for p in participants]</code></pre>
 </details>
 </section>
 <section>
@@ -215,7 +229,7 @@ the <code>'color'</code> field is <code>None</code>. (optional, default = True)<
 , 'clashes':     {}
 , 'aversions':   {}
 , 'inference':   0
-, 'connections': {}
+, 'connections': {&lt;other idx&gt;: &lt;weight&gt;}
 , 'turmoil':     0
 , 'wounds':      [] }
 </code></pre></div>
@@ -251,7 +265,7 @@ the <code>'color'</code> field is <code>None</code>. (optional, default = True)<
         , &#39;clashes&#39;:     {}
         , &#39;aversions&#39;:   {}
         , &#39;inference&#39;:   0
-        , &#39;connections&#39;: {}
+        , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
         , &#39;turmoil&#39;:     0
         , &#39;wounds&#39;:      [] }
         ```
@@ -358,7 +372,31 @@ field (optional, default = <code>False</code>)</li>
     else:
         participants = parts
 
-    return participants</code></pre>
+    bound   = [p for p in participants if p[&#39;idx&#39;] == &#39;bound&#39;]
+    network = bound[0].get(&#39;network&#39;, []) if bound else []
+    cons    = {n[&#39;module_name&#39;] : connects(n, network) for n in network}
+
+    return [p | {&#39;connections&#39;: cons.get(p[&#39;idx&#39;])} for p in participants]</code></pre>
+</details>
+</dd>
+<dt id="yal.util.util.connects"><code class="name flex">
+<span>def <span class="ident">connects</span></span>(<span>participant, participants) ‑> set[str]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Weighted connections between participants</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def connects(participant, participants) -&gt; set[str]:
+    &#34;&#34;&#34;
+    Weighted connections between participants
+    &#34;&#34;&#34;
+    name = participant[&#39;module_name&#39;]
+    sigs = set(participant.get(&#39;signal_names&#39;, []))
+    cons =  { p[&#39;module_name&#39;]: len((set(p.get(&#39;signal_names&#39;, [])) &amp; sigs) - {&#39;G&#39;, &#39;P&#39;})
+              for p in participants if p[&#39;module_name&#39;] not in [name, &#39;bound&#39;] }
+    return cons</code></pre>
 </details>
 </dd>
 <dt id="yal.util.util.random_color"><code class="name flex">
@@ -431,6 +469,7 @@ field (optional, default = <code>False</code>)</li>
 <ul class="">
 <li><code><a title="yal.util.util.as_participant" href="#yal.util.util.as_participant">as_participant</a></code></li>
 <li><code><a title="yal.util.util.as_participants" href="#yal.util.util.as_participants">as_participants</a></code></li>
+<li><code><a title="yal.util.util.connects" href="#yal.util.util.connects">connects</a></code></li>
 <li><code><a title="yal.util.util.random_color" href="#yal.util.util.random_color">random_color</a></code></li>
 <li><code><a title="yal.util.util.randomize_placement" href="#yal.util.util.randomize_placement">randomize_placement</a></code></li>
 </ul>

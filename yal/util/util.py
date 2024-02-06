@@ -72,7 +72,7 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
         , 'clashes':     {}
         , 'aversions':   {}
         , 'inference':   0
-        , 'connections': {}
+        , 'connections': {<other idx>: <weight>}
         , 'turmoil':     0
         , 'wounds':      [] }
         ```
