@@ -9,7 +9,7 @@ with open('requirements.txt', 'r') as req:
     requirements = req.read().splitlines()
 
 setup( name                          = package_name
-     , version                       = '0.0.3'
+     , version                       = '0.0.4'
      , author                        = 'Yannick Uhlmann'
      , author_email                  = 'augustunderground@pm.me'
      , description                   = 'YAL Parser for Python'
