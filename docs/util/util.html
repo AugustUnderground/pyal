@@ -43,12 +43,7 @@ def _init_participant():
            , &#39;ymin&#39;:        0
            , &#39;width&#39;:       0
            , &#39;height&#39;:      0
-           , &#39;clashes&#39;:     {}
-           , &#39;aversions&#39;:   {}
-           , &#39;inference&#39;:   0
-           , &#39;connections&#39;: {}
-           , &#39;turmoil&#39;:     0
-           , &#39;wounds&#39;:      [] }
+           , &#39;connections&#39;: {} }
 
 def random_color() -&gt; str:
     &#34;&#34;&#34;
@@ -99,12 +94,7 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
     , &#39;ymin&#39;:        &lt;lower left y coordinate&gt;
     , &#39;width&#39;:       &lt;width of module&gt;
     , &#39;height&#39;:      &lt;height of module&gt;
-    , &#39;clashes&#39;:     {}
-    , &#39;aversions&#39;:   {}
-    , &#39;inference&#39;:   0
-    , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
-    , &#39;turmoil&#39;:     0
-    , &#39;wounds&#39;:      [] }
+    , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;} }
     ```
     &#34;&#34;&#34;
 
@@ -244,12 +234,7 @@ the <code>'color'</code> field is <code>None</code>. (optional, default = True)<
 , 'ymin':        &lt;lower left y coordinate&gt;
 , 'width':       &lt;width of module&gt;
 , 'height':      &lt;height of module&gt;
-, 'clashes':     {}
-, 'aversions':   {}
-, 'inference':   0
-, 'connections': {&lt;other idx&gt;: &lt;weight&gt;}
-, 'turmoil':     0
-, 'wounds':      [] }
+, 'connections': {&lt;other idx&gt;: &lt;weight&gt;} }
 </code></pre></div>
 <details class="source">
 <summary>
@@ -280,12 +265,7 @@ the <code>'color'</code> field is <code>None</code>. (optional, default = True)<
     , &#39;ymin&#39;:        &lt;lower left y coordinate&gt;
     , &#39;width&#39;:       &lt;width of module&gt;
     , &#39;height&#39;:      &lt;height of module&gt;
-    , &#39;clashes&#39;:     {}
-    , &#39;aversions&#39;:   {}
-    , &#39;inference&#39;:   0
-    , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;}
-    , &#39;turmoil&#39;:     0
-    , &#39;wounds&#39;:      [] }
+    , &#39;connections&#39;: {&lt;other idx&gt;: &lt;weight&gt;} }
     ```
     &#34;&#34;&#34;
 
