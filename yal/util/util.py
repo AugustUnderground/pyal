@@ -13,12 +13,7 @@ def _init_participant():
            , 'ymin':        0
            , 'width':       0
            , 'height':      0
-           , 'clashes':     {}
-           , 'aversions':   {}
-           , 'inference':   0
-           , 'connections': {}
-           , 'turmoil':     0
-           , 'wounds':      [] }
+           , 'connections': {} }
 
 def random_color() -> str:
     """
@@ -69,12 +64,7 @@ def as_participant( module: core.Module, opt_fields: list[str] = None
     , 'ymin':        <lower left y coordinate>
     , 'width':       <width of module>
     , 'height':      <height of module>
-    , 'clashes':     {}
-    , 'aversions':   {}
-    , 'inference':   0
-    , 'connections': {<other idx>: <weight>}
-    , 'turmoil':     0
-    , 'wounds':      [] }
+    , 'connections': {<other idx>: <weight>} }
     ```
     """
 
